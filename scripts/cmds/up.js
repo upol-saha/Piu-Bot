@@ -83,6 +83,8 @@ module.exports = {
       await api.editMessage(currentMessage.trim(), checkMessage.messageID);
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
+  } else {
+      message.reply('use "x" or "t".', event.threadID);
   }
  }
 };
