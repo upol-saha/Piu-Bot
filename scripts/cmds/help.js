@@ -3,7 +3,12 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete ="『  UPoL🐔  』";
+const doNotDelete ="『 NAXO V2 | UPoL🐔 』";
+/** 
+* @author NTKhang
+* @author: do not delete it
+* @message if you delete or edit it you will get a global ban
+*/
 
 module.exports = {
   config: {
@@ -33,40 +38,34 @@ module.exports = {
 
   langs: {
     en: {
-      help: `╭─『 AI & IMAGE GENERATOR 』
-│✧gpt ✧imagine ✧nijiz 
-│✧emi ✧flux ✧sdxl ✧rl
-│✧prodia ✧pencil ✧fx
-╰───────────◊
-╭─『 FUNNY GAMES 』
-│✧pet ✧wordgame ✧flag
-│✧quiz ✧scramble ✧slot 
-│✧anime ✧animewar ✧q
-╰───────────◊
-╭─『 UPDATED BANK 』
-│✧bank 
-│ Type bank <to see available bank actions>
-╰───────────◊
-╭─『 GOAT COMMANDS STORE 』
-│✧store
-╰───────────◊
-╭─『 USER INFO 』 
-│✧pfp ✧uid
-╰───────────◊
-╭─『 ADMIN & BOT INFO 』
-│✧info ✧up
-╰───────────◊
-╭─『 SIMSIMI & TEACH 』
-│✧sim ✧chat ✧teach
-╰───────────◊
-╭─『 FOR RELIGION 』
-│✧namaj 
-╰───────────◊
-╭─『 OTHERS & DOWNLOADER LINK 』
-│✧trans ✧guide ✧getlink 
-│✧imgur ✧menu ✧time ✧up
-│✧uns ✧say ✧sys ✧tid
-╰───────────◊\n\n╭─『  » Total Cmds %4 cmds.\n│ » Type %5help <cmd> to learn.\n├────────◊\n│ %6\n╰───────────◊`,
+      help: `╭─『 AI 』
+╰─✧ hecai
+
+╭─『 VOICE AI 』
+╰─✧ vai
+
+╭─『 IMAGINATION 』
+╰─✧ imagine
+╰─✧ flux
+╰─✧ prodia
+
+╭─『 MJ 』 
+╰─✧ mj
+
+╭─『 ANIME IMAGINATION 』
+╰─✧ aniv2
+╰─✧ niy
+╰─✧ xl
+
+╭─『 USER 』
+╰─✧ help
+╰─✧ prefix
+
+╭─『 UPTIME 』
+╰─✧ u
+
+╭─『 MEDIA 』
+╰─✧ yt \n\n╭─『  » Total Cmds %4 cmds.\n╰─ » Type %5help <cmd> to learn.\n╰─ %6\n╰───────────◊`,
       help2: "%1├───────✧\n│ » Currently, the bot has %2 commands that can be used\n│ » Total Cmds: %3 \n│ %4\n╰─────────────✧",
       commandNotFound: "Command \"%1\" does not exist",
       getInfoCommand: "✧ ─── NAME ──── ✧\n » %1\n✧ ─── INFO ─── ✧\n » Author: %8\n » Description: %2\n\✧ ─── Usage ─── ✧\n%9\n✧───────✧",
