@@ -3,9 +3,8 @@ const path = require("path");
 const axios = require("axios");
 module.exports = {
   config: {
-    name: "niy",
-    aliases: ["nijiy"],
-    author: "UPoL🐔 | Mahi--",
+    name: "aniv2",
+    author: "UPoL🐔",
     version: "1.0",
     cooldowns: 10,
     role: 2,
@@ -15,12 +14,12 @@ module.exports = {
   onStart: async function ({ message, args, api, event }) {
     const prompt = args.join(" ");
     if (!prompt) {
-      return api.sendMessage("❌ | You need to provide a prompt.", event.threadID);
+      return api.sendMessage("Prompt please.", event.threadID);
     }
     const startTime = Date.now(); 
     api.sendMessage("Please wait... ⏳", event.threadID, event.messageID);
     try {
-      const apiUrl = `https://upol-nijiy.onrender.com/xl31?prompt=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://upol-aniv2.onrender.com/aniv2?prompt=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const imageUrl = response.data.imageUrl;
       if (!imageUrl) {
