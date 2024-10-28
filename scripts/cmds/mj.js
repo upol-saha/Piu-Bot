@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
-const axios = require("axios");
+const i = require("fs");
+const m = require("path");
+const a = require("axios");
 module.exports = {
   config: {
     name: "mj",
@@ -13,28 +13,28 @@ module.exports = {
     }
   },
   onStart: async function ({ message, args, api, event }) {
-    const prompt = args.join(" ");
-    if (!prompt) {
+    const o = args.join(" ");
+    if (!o) {
       return api.sendMessage("add prompt.", event.threadID);
     }
-    api.sendMessage("Processing....⏳", event.threadID, event.messageID);
+    await message.reply("Processing....⏳", event.threadID, event.messageID);
     try {
-      const imagineApiUrl = `https://upol-happyjourney.onrender.com/midjourney?${encodeURIComponent(prompt)}`;
-      const imagineResponse = await axios.get(imagineApiUrl, {
+      const u = `https://upol-happyjourney.onrender.com/midjourney?prompt=${encodeURIComponent(o)}`;
+      const r = await a.get(u, {
         responseType: "arraybuffer"
       });
-      const cacheFolderPath = path.join(__dirname, "cache");
-      if (!fs.existsSync(cacheFolderPath)) {
-        fs.mkdirSync(cacheFolderPath);
+      const cp = m.join(__dirname, "cache");
+      if (!i.existsSync(cp)) {
+        i.mkdirSync(cp);
       }
-      const imagePath = path.join(cacheFolderPath, `${Date.now()}_generated_image.png`);
-      fs.writeFileSync(imagePath, Buffer.from(imagineResponse.data, "binary"));
-      const stream = fs.createReadStream(imagePath);
-      api.sendMessage({
+      const p = m.join(cp, `${Date.now()}_generated_image.png`);
+      i.writeFileSync(p, Buffer.from(r.data, "binary"));
+      const s = i.createReadStream(p);
+      message.reply({
         body: "Generated!",
-        attachment: stream
+        attachment: s
       }, event.threadID, () => {
-        fs.unlinkSync(imagePath);
+        i.unlinkSync(p);
       });
     } catch (error) {
       console.error("Error:", error);
