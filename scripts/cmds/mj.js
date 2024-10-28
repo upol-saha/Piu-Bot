@@ -1,43 +1,51 @@
-const i = require("fs");
-const m = require("path");
-const a = require("axios");
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
+
 module.exports = {
   config: {
     name: "mj",
-    author: "UPoL",
+    author: "UPoL 🐔",
     version: "1.0",
-    cooldowns: 400,
+    cooldowns: 420,
     role: 0,
+    category: "image",
     guide: {
-      en: "{pn} <prompt>"
-    }
+				en: "{pn} <prompt>",
+	 }
   },
   onStart: async function ({ message, args, api, event }) {
-    const o = args.join(" ");
-    if (!o) {
-      return api.sendMessage("add prompt.", event.threadID);
+    const prompt = args.join(" ");
+
+    if (!prompt) {
+      return message.reply("add prompt.", event.threadID);
     }
-    const wl = await message.reply("Processing....⏳", event.threadID, event.messageID);
-       api.setMessageReaction("⏳", event.messageID, () => {}, true);
+
+    const wait = await message.reply("Processing....⏳", event.threadID, event.messageID);
+    api.setMessageReaction("⏳", event.messageID, () => {}, true);
+
     try {
-      const u = `https://upol-happyjourney.onrender.com/midjourney?prompt=${encodeURIComponent(o)}`;
-      const r = await a.get(u, {
+      const imagineApiUrl = `https://upol-happyjourney.onrender.com/midjourney?prompt=${encodeURIComponent(prompt)}`;
+
+      const imagineResponse = await axios.get(imagineApiUrl, {
         responseType: "arraybuffer"
       });
-      const cp = m.join(__dirname, "cache");
-      if (!i.existsSync(cp)) {
-        i.mkdirSync(cp);
+
+      const cacheFolderPath = path.join(__dirname, "cache");
+      if (!fs.existsSync(cacheFolderPath)) {
+        fs.mkdirSync(cacheFolderPath);
       }
-      const p = m.join(cp, `${Date.now()}_generated_image.png`);
-      i.writeFileSync(p, Buffer.from(r.data, "binary"));
-      const s = i.createReadStream(p);
+      const imagePath = path.join(cacheFolderPath, `${Date.now()}_generated_image.png`);
+      fs.writeFileSync(imagePath, Buffer.from(imagineResponse.data, "binary"));
+
+      const stream = fs.createReadStream(imagePath);
       message.reply({
         body: "Generated!",
-        attachment: s
+        attachment: stream
       }, event.threadID, () => {
-        i.unlinkSync(p);
+        fs.unlinkSync(imagePath);
       });
-      api.unsendMessage(wl, messageID);
+      message.unsend(wait, event.messageID);
       api.setMessageReaction("✅", event.messageID, () => {}, true);
     } catch (error) {
       console.error("Error:", error);
