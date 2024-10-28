@@ -17,7 +17,8 @@ module.exports = {
     if (!o) {
       return api.sendMessage("add prompt.", event.threadID);
     }
-    await message.reply("Processing....⏳", event.threadID, event.messageID);
+    const wl = await message.reply("Processing....⏳", event.threadID, event.messageID);
+       api.setMessageReaction("⏳", event.messageID, () => {}, true);
     try {
       const u = `https://upol-happyjourney.onrender.com/midjourney?prompt=${encodeURIComponent(o)}`;
       const r = await a.get(u, {
@@ -36,9 +37,12 @@ module.exports = {
       }, event.threadID, () => {
         i.unlinkSync(p);
       });
+      api.unsendMessage(wl, messageID);
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
     } catch (error) {
       console.error("Error:", error);
       api.sendMessage("error.", event.threadID, event.messageID);
+      api.setMessageReaction("❌", event.messageID, () => {}, true);
     }
   }
 };
