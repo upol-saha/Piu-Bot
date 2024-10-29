@@ -39,7 +39,8 @@ module.exports = {
   langs: {
     en: {
       help: `╭─『 AI 』
-╰─✧ hecai
+╰─✧ hecai 
+╰─✧ gemini
 
 ╭─『 VOICE AI 』
 ╰─✧ vai
