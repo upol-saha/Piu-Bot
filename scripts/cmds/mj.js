@@ -8,11 +8,11 @@ module.exports = {
     author: "UPoL 🐔",
     version: "1.0",
     cooldowns: 420,
-    role: 0,
+    role: 2,
     category: "image",
     guide: {
-				en: "{pn} <prompt>",
-	 }
+       en: "{pn} <prompt>",
+    }
   },
   onStart: async function ({ message, args, api, event }) {
     const prompt = args.join(" ");
